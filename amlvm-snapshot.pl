@@ -28,6 +28,7 @@
 #    SUDO
 #
 use lib '/usr/local/share/perl/5.8.4';
+use lib '/usr/lib/amanda/perl';
 use strict;
 use Getopt::Long;
 
