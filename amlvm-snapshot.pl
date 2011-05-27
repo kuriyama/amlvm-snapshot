@@ -224,14 +224,15 @@ sub remove_snapshot {
 # Resolves the underlying device on which the configured directory resides.
 sub resolve_device {
     my $self = shift;
+    my $target_disk = $self->{device} || $self->{disk};
 
     # Search mtab for the mount point. Get the device path and filesystem type.
     my $mnt_device = $self->scan_mtab(
-        sub { return $_[0] if ($_[1] eq $self->{disk}); }
+        sub { return $_[0] if ($_[1] eq $target_disk); }
     );
 
     my $fs_type = $self->scan_mtab(
-        sub { return $_[2] if ($_[1] eq $self->{disk}); }
+        sub { return $_[2] if ($_[1] eq $target_disk); }
     );
 
     if (!defined $mnt_device) {
